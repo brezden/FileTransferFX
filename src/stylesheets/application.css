@@ -1,0 +1,24 @@
+#screen{
+	-fx-background-color:#222222;
+}
+
+#menuBar{
+	-fx-background-color:#292A2D;
+}
+
+.label{
+	-fx-text-fill: white;
+	-fx-font-size: 12.5px;
+}
+
+.menu, .menu-item, .context-menu{
+	-fx-background-color:#292A2D;
+}
+
+.menu-item:focused, .menu-item:hover{
+	-fx-background-color:#363636;
+}
+
+.menu-item:pressed{
+	-fx-background-color:#4D4D4D;
+}
