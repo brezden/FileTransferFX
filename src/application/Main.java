@@ -1,5 +1,8 @@
 package application;
 	
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -16,10 +19,14 @@ public class Main extends Application {
 		String css = this.getClass().getResource("/stylesheets/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
 		
+		FileController fileController = new FileController();
+		fileController.fileInitializer();
+		
+		
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(650);
-		primaryStage.setWidth(900);
+		primaryStage.setWidth(915);
 		primaryStage.setResizable(false);
 		
 		Image programIcon = new Image("images/fileTransferFXLogo.png");

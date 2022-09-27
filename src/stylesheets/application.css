@@ -24,15 +24,18 @@
 }
 
 .list-cell{
-	-fx-background-color:#474747;
+	-fx-background-color:#363636;
 	-fx-text-fill: white;
 }
 
-#btn2{
+#listViewButtons{
 	-fx-background-color:#8a8a8a;
 	-fx-text-fill: white;
 }
 
 #fileListView{
+	-fx-border-insets: 0px;
+	-fx-border-width: 0px;
+	-fx-padding: 0px;
 	-fx-background-color:#363636;
 }
