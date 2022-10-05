@@ -28,10 +28,11 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button fx:id="listViewButtons" layoutX="25.0" layoutY="295.0" mnemonicParsing="false" onAction="#addFolderButton" prefHeight="25.0" prefWidth="190.0" text="Add Folder" textAlignment="CENTER" />
-      <ListView fx:id="fileListView" layoutX="25.0" layoutY="34.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="850.0" snapToPixel="false" />
-      <Button fx:id="listViewButtons" layoutX="473.0" layoutY="295.0" mnemonicParsing="false" onAction="#removeFilesButton" prefHeight="25.0" prefWidth="190.0" text="Remove Files" textAlignment="CENTER" />
-      <Button fx:id="listViewButtons" layoutX="238.0" layoutY="295.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Add Files" textAlignment="CENTER" />
-      <Button fx:id="listViewButtons" layoutX="685.0" layoutY="295.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Save as Preset" textAlignment="CENTER" />
+      <Button fx:id="listViewAddButtons" layoutX="33.0" layoutY="37.0" mnemonicParsing="false" onAction="#addFolderButton" prefHeight="25.0" prefWidth="190.0" text="Add Folder" textAlignment="CENTER" />
+      <ListView fx:id="fileListView" layoutX="245.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="635.0" snapToPixel="false" />
+      <Button fx:id="listViewRemoveButtons" layoutX="33.0" layoutY="115.0" mnemonicParsing="false" onAction="#removeFilesButton" prefHeight="25.0" prefWidth="190.0" text="Remove Files" textAlignment="CENTER" />
+      <Button fx:id="listViewAddButtons" layoutX="33.0" layoutY="76.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Add Files" textAlignment="CENTER" />
+      <Button fx:id="listViewSavePresetButtons" layoutX="33.0" layoutY="193.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Save as Preset" textAlignment="CENTER" />
+      <Button fx:id="listViewRemoveButtons" layoutX="33.0" layoutY="154.0" mnemonicParsing="false" onAction="#removeFilesButton" prefHeight="25.0" prefWidth="190.0" text="Remove Folder" textAlignment="CENTER" />
    </children>
 </AnchorPane>

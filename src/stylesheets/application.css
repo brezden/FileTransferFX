@@ -28,8 +28,18 @@
 	-fx-text-fill: white;
 }
 
-#listViewButtons{
-	-fx-background-color:#8a8a8a;
+#listViewAddButtons{
+	-fx-background-color:#4aa863;
+	-fx-text-fill: white;
+}
+
+#listViewRemoveButtons{
+	-fx-background-color:#ba5252;
+	-fx-text-fill: white;
+}
+
+#listViewSavePresetButtons{
+	-fx-background-color:#696969;
 	-fx-text-fill: white;
 }
 
