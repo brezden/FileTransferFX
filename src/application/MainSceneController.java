@@ -19,18 +19,23 @@ public class MainSceneController {
 	@FXML
 	private ListView fileListView;
 	
+	FileController fileController = new FileController();
+	
 	public void addFolderButton(ActionEvent event) {
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Select Folder");
 
-		File selectedFile = directoryChooser.showDialog(null);
+		File selectedFolder = directoryChooser.showDialog(null);
 		
-		if (selectedFile != null) {
-			fileListView.getItems().add(selectedFile.getAbsolutePath());	
+		if (selectedFolder != null) {
+			fileListView.getItems().add(selectedFolder.getAbsolutePath());	
 		}
 	}
 	
 	public void addFilesButton(ActionEvent event) {
+	
+		fileController.FileTest();
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Select Files");
 
@@ -67,4 +72,16 @@ public class MainSceneController {
 			}
 		}
 	}
+	
+	public void removeFolderButton(ActionEvent event) {
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		directoryChooser.setTitle("Close Folder");
+
+		File selectedFolder = directoryChooser.showDialog(null);
+		
+		if (selectedFolder != null) {
+			fileListView.getItems().remove(selectedFolder.getAbsolutePath());	
+		}
+	}
+	
 }

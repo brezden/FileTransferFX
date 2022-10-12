@@ -33,6 +33,6 @@
       <Button fx:id="listViewRemoveButtons" layoutX="33.0" layoutY="115.0" mnemonicParsing="false" onAction="#removeFilesButton" prefHeight="25.0" prefWidth="190.0" text="Remove Files" textAlignment="CENTER" />
       <Button fx:id="listViewAddButtons" layoutX="33.0" layoutY="76.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Add Files" textAlignment="CENTER" />
       <Button fx:id="listViewSavePresetButtons" layoutX="33.0" layoutY="193.0" mnemonicParsing="false" onAction="#addFilesButton" prefHeight="25.0" prefWidth="190.0" text="Save as Preset" textAlignment="CENTER" />
-      <Button fx:id="listViewRemoveButtons" layoutX="33.0" layoutY="154.0" mnemonicParsing="false" onAction="#removeFilesButton" prefHeight="25.0" prefWidth="190.0" text="Remove Folder" textAlignment="CENTER" />
+      <Button fx:id="listViewRemoveButtons" layoutX="33.0" layoutY="154.0" mnemonicParsing="false" onAction="#removeFolderButton" prefHeight="25.0" prefWidth="190.0" text="Remove Folder" textAlignment="CENTER" />
    </children>
 </AnchorPane>

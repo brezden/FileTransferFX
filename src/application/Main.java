@@ -1,8 +1,4 @@
 package application;
-	
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -20,8 +16,6 @@ public class Main extends Application {
 		scene.getStylesheets().add(css);
 		
 		FileController fileController = new FileController();
-		fileController.fileInitializer();
-		
 		
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
