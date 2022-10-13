@@ -28,6 +28,14 @@
 	-fx-text-fill: white;
 }
 
+.label-menu-item .label{
+      -fx-text-alignment:center; 
+}
+
+.label-menu-item .label .text{
+      -fx-text-alignment:center; 
+}
+
 #listViewAddButtons{
 	-fx-background-color:#4aa863;
 	-fx-text-fill: white;

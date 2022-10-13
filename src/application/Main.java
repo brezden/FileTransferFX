@@ -20,7 +20,7 @@ public class Main extends Application {
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(650);
-		primaryStage.setWidth(915);
+		primaryStage.setWidth(1150);
 		primaryStage.setResizable(false);
 		
 		Image programIcon = new Image("images/fileTransferFXLogo.png");
