@@ -1,6 +1,10 @@
 package application;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -21,6 +25,16 @@ public class MainSceneController {
 	
 	FileController fileController = new FileController();
 	
+	public void menuBarHelpButton(ActionEvent event) {
+		try {
+		    Desktop.getDesktop().browse(new URL("https://github.com/brezden/FileTransferFX").toURI());
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch (URISyntaxException e) {
+		    e.printStackTrace();
+		}
+	}
+
 	public void addFolderButton(ActionEvent event) {
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Select Folder");

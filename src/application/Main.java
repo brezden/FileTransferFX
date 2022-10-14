@@ -16,12 +16,11 @@ public class Main extends Application {
 		scene.getStylesheets().add(css);
 		
 		FileController fileController = new FileController();
-		
+	
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(650);
 		primaryStage.setWidth(1150);
-		primaryStage.setResizable(false);
 		
 		Image programIcon = new Image("images/fileTransferFXLogo.png");
 		primaryStage.getIcons().add(programIcon);

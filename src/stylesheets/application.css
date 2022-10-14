@@ -1,9 +1,10 @@
-#screen{
-	-fx-background-color:#222222;
-}
-
 #menuBar{
 	-fx-background-color:#292A2D;
+	
+}
+
+#borderPane{
+	-fx-background-color: #222222;
 }
 
 .label{
@@ -26,6 +27,7 @@
 .list-cell{
 	-fx-background-color:#363636;
 	-fx-text-fill: white;
+	-fx-font-size: 15px;
 }
 
 .label-menu-item .label{
@@ -36,24 +38,20 @@
       -fx-text-alignment:center; 
 }
 
-#listViewAddButtons{
-	-fx-background-color:#4aa863;
-	-fx-text-fill: white;
-}
-
-#listViewRemoveButtons{
-	-fx-background-color:#ba5252;
-	-fx-text-fill: white;
-}
-
-#listViewSavePresetButtons{
-	-fx-background-color:#696969;
-	-fx-text-fill: white;
-}
-
 #fileListView{
 	-fx-border-insets: 0px;
 	-fx-border-width: 0px;
 	-fx-padding: 0px;
 	-fx-background-color:#363636;
+}
+
+#presetListView{
+	-fx-border-insets: 0px;
+	-fx-border-width: 0px;
+	-fx-padding: 0px;
+	-fx-background-color:#363636;
+}
+
+#menuText {
+	-fx-font-size: 20px;
 }
