@@ -14,9 +14,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		String css = this.getClass().getResource("/stylesheets/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
-		
-		FileController fileController = new FileController();
-	
+			
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(650);

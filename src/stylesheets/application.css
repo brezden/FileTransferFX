@@ -30,6 +30,16 @@
 	-fx-font-size: 15px;
 }
 
+.list-cell:filled:hover {
+    -fx-background-color: #318bcc;
+    -fx-text-fill: white;
+}
+
+.list-cell:selected {
+    -fx-background-color: #236fa6;
+    -fx-text-fill: white;
+}
+
 .label-menu-item .label{
       -fx-text-alignment:center; 
 }
@@ -38,7 +48,7 @@
       -fx-text-alignment:center; 
 }
 
-#fileListView{
+#pathListView{
 	-fx-border-insets: 0px;
 	-fx-border-width: 0px;
 	-fx-padding: 0px;
