@@ -14,7 +14,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		String css = this.getClass().getResource("/stylesheets/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
-			
+		
 		primaryStage.setTitle("File Transfer FX");
 		primaryStage.setScene(scene);
 		primaryStage.setHeight(650);
@@ -24,7 +24,6 @@ public class Main extends Application {
 		primaryStage.getIcons().add(programIcon);
 		
 		primaryStage.show();
-			
 	}
 	
 	public static void main(String[] args) {

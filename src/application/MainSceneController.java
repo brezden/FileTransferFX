@@ -7,25 +7,36 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class MainSceneController {
+public class MainSceneController implements Initializable {
 	
 	@FXML
 	private Button btn2;
 	
 	@FXML
-	private ListView pathListView;
-	
+	private ListView<String> pathListView;
+
 	FileController fileController = new FileController();
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		pathListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+	}
 	
 	public void menuBarHelpButton(ActionEvent event) {
 		try {
@@ -87,28 +98,40 @@ public class MainSceneController {
 	}
 	
 	public void removeFileButton(ActionEvent event) {
-		Object fileRemoveObject = pathListView.getSelectionModel().getSelectedItem();
+		ObservableList<String> fileRemoveObject = pathListView.getSelectionModel().getSelectedItems();
+		Object[] fileRemoveArray = fileRemoveObject.toArray(); // Converting the interface to an array
 		
-		if (fileRemoveObject != null) {
-			String fileRemovePath = fileRemoveObject.toString();
+		int arraySize = fileRemoveArray.length;
+		
+		for (int i = 0; i < arraySize; i++) {
+			String filePath = (String) fileRemoveArray[i];
 			
-			if (fileController.filePathExist(fileRemovePath)) {
-				pathListView.getItems().remove(fileRemovePath);
-				fileController.removeFilePath(fileRemovePath);
+			if (fileController.filePathExist(filePath)) {
+				pathListView.getItems().remove(filePath);
+				fileController.removeFilePath(filePath);
 			}
 		}
 	}
 	
 	public void removeFolderButton(ActionEvent event) {
-		Object folderRemoveObject = pathListView.getSelectionModel().getSelectedItem();
+		ObservableList<String> folderRemoveObject = pathListView.getSelectionModel().getSelectedItems();
+		Object[] FolderRemoveArray = folderRemoveObject.toArray(); // Converting the interface to an array
 		
-		if (folderRemoveObject != null) {
-			String folderRemovePath = folderRemoveObject.toString();
+		int arraySize = FolderRemoveArray.length;
 			
-			if (fileController.folderPathExist(folderRemovePath)) {
-				pathListView.getItems().remove(folderRemovePath);
-				fileController.removeFolderPath(folderRemovePath);
+		for (int i = 0; i < arraySize; i++) {
+			String folderPath = (String) FolderRemoveArray[i];
+			
+			if (fileController.folderPathExist(folderPath)) {
+				pathListView.getItems().remove(folderPath);
+				fileController.removeFolderPath(folderPath);
 			}
 		}
+	}
+	
+	public void clearButton(ActionEvent event) {
+		pathListView.getItems().clear();
+		fileController.clearFilePaths();
+		fileController.clearFolderPaths();
 	}
 }

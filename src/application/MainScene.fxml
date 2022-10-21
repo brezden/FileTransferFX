@@ -22,9 +22,12 @@
           </Menu>
           <Menu fx:id="menuText" mnemonicParsing="false" text="Remove">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#removeFileButton" text="Remove File" />
-                  <MenuItem mnemonicParsing="false" onAction="#removeFolderButton" text="Remove Folder" />
-                  <MenuItem mnemonicParsing="false" text="Remove All" />
+              <MenuItem mnemonicParsing="false" onAction="#removeFileButton" text="Selected Files" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeFolderButton" text="Selected Folders" />
+                  <MenuItem mnemonicParsing="false" text="Selected Items" />
+                  <MenuItem mnemonicParsing="false" text="All Files" />
+                  <MenuItem mnemonicParsing="false" text="All Folders" />
+                  <MenuItem mnemonicParsing="false" onAction="#clearButton" text="Clear" />
             </items>
           </Menu>
             <Menu fx:id="menuText" mnemonicParsing="false" text="Preset">

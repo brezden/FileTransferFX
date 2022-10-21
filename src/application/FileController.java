@@ -1,17 +1,11 @@
 package application;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Queue;
-
-import org.apache.commons.io.FileUtils;
 
 public class FileController {
 	
-	Queue<String> tempFilePaths = new ArrayDeque<String>();
-	Queue<String> tempFolderPaths = new ArrayDeque<String>();
+	ArrayList<String> tempFilePaths = new ArrayList<String>();
+	ArrayList<String> tempFolderPaths = new ArrayList<String>();
 	
 	public FileController() {
 		/*
@@ -52,5 +46,13 @@ public class FileController {
 	
 	public void removeFolderPath(String folderPath) {
 		tempFolderPaths.remove(folderPath);
+	}
+	
+	public void clearFilePaths() {
+		tempFilePaths.clear();
+	}
+	
+	public void clearFolderPaths() {
+		tempFolderPaths.clear();
 	}
 }
