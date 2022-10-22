@@ -48,7 +48,7 @@
       -fx-text-alignment:center; 
 }
 
-#pathListView{
+#DirectoryListView{
 	-fx-border-insets: 0px;
 	-fx-border-width: 0px;
 	-fx-padding: 0px;
@@ -64,4 +64,8 @@
 
 #menuText {
 	-fx-font-size: 20px;
+}
+
+.progress-bar > .bar{
+	-fx-background-color: #432423;
 }

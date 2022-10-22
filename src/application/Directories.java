@@ -1,29 +1,25 @@
 package application;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class FileController {
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.stage.DirectoryChooser;
+
+public class Directories{
 	
 	ArrayList<String> tempFilePaths = new ArrayList<String>();
 	ArrayList<String> tempFolderPaths = new ArrayList<String>();
-	
-	public FileController() {
-		/*
 		
-		String source = "C:\\Users\\Callum\\Documents\\Documents\\Personal\\School\\UFV\\Fall 2022\\COMP 230\\Week 1";
-		File srcDir = new File(source);
-		
-		String destination = "C:\\Users\\Callum\\Desktop\\Test";
-		File destDir = new File(destination);
-		
-		try {
-			FileUtils.copyFile(srcDir, destDir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		*/
-	}
-	
 	public boolean filePathExist(String filePath) {
 		return(tempFilePaths.contains(filePath));
 	}
@@ -56,3 +52,4 @@ public class FileController {
 		tempFolderPaths.clear();
 	}
 }
+
