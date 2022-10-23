@@ -64,6 +64,7 @@ public class UserInterface implements Initializable{
 			String FolderPath = SelectedFolder.getAbsolutePath();
 			FolderPath = FolderPath.replace("\\" , "\\\\");
 			folderPathHandler(FolderPath);
+			consoleLabelEdit("Added " +  FolderPath + " and its contents.");
 		}
 	}
 	
@@ -82,6 +83,7 @@ public class UserInterface implements Initializable{
 		
 		if (selectedFiles != null) {
 			filePathHandler(selectedFiles);
+			consoleLabelEdit("Added " + selectedFiles.size() + " files.");
 		}
 	}
 	
@@ -90,6 +92,7 @@ public class UserInterface implements Initializable{
 		Object[] fileRemoveArray = fileRemoveObject.toArray();
 		int arraySize = fileRemoveArray.length;
 		removeAllFiles(fileRemoveArray, arraySize);
+		consoleLabelEdit("Removed selected files.");
 	}
 	
 	public void removeFolderButton(ActionEvent event) {
@@ -97,8 +100,9 @@ public class UserInterface implements Initializable{
 		Object[] folderRemoveArray = folderRemoveObject.toArray();
 		int arraySize = folderRemoveArray.length;
 		removeAllFolders(folderRemoveArray, arraySize);
+		consoleLabelEdit("Removed selected folders.");
 	}
-
+	
 	public void selectedItemButton(ActionEvent event) {
 		ObservableList<String> filePathsObject = DirectoryListView.getSelectionModel().getSelectedItems();
 		Object[] filePathsArray = filePathsObject.toArray();
@@ -106,6 +110,7 @@ public class UserInterface implements Initializable{
 		
 		removeAllFolders(filePathsArray, arraySize);
 		removeAllFiles(filePathsArray, arraySize);
+		consoleLabelEdit("Removed selected items.");
 	}
 	
 	public void allFilesRemove(ActionEvent event) {
@@ -113,6 +118,7 @@ public class UserInterface implements Initializable{
 		int arraySize = tempFileArray.length;		
 		removeAllFiles(tempFileArray, arraySize);
 		DirectoryClass.clearFilePaths();
+		consoleLabelEdit("Removed all files.");
 	}
 	
 	public void allFoldersRemove(ActionEvent event) {
@@ -120,12 +126,14 @@ public class UserInterface implements Initializable{
 		int arraySize = tempFolderArray.length;		
 		removeAllFolders(tempFolderArray, arraySize);
 		DirectoryClass.clearFolderPaths();
+		consoleLabelEdit("Removed all folders.");
 	}
 	
 	public void clearButton(ActionEvent event) {
 		DirectoryClass.clearFilePaths();
 		DirectoryClass.clearFolderPaths();
 		DirectoryListView.getItems().clear();
+		consoleLabelEdit("Removed all items.");
 	}
 	
 	public void filePathHandler(List<File> selectedFiles) {
