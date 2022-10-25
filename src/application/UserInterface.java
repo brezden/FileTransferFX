@@ -141,10 +141,7 @@ public class UserInterface implements Initializable{
 			String filePath = selectedFiles.get(i).getAbsolutePath();
 			filePath = filePath.replace("\\" , "\\\\");
 			
-			if (DirectoryClass.filePathExist(filePath)) {
-				System.out.println("File Exists!"); 
-			}
-			else {
+			if (DirectoryClass.filePathExist(filePath) == false) {
 				DirectoryListView.getItems().add(filePath);
 				DirectoryClass.addFilePath(filePath);
 			}
@@ -152,10 +149,7 @@ public class UserInterface implements Initializable{
 	}
 	
 	public void folderPathHandler(String folderPath) {
-		if (DirectoryClass.folderPathExist(folderPath)) {
-			consoleLabelEdit("Folder exists!");
-		}
-		else {
+		if (DirectoryClass.folderPathExist(folderPath) == false) {
 			DirectoryListView.getItems().add(folderPath);
 			DirectoryClass.addFolderPath(folderPath);
 		}
