@@ -69,3 +69,15 @@
 .progress-bar > .bar{
 	-fx-background-color: #432423;
 }
+
+#presetAddButton{
+	-fx-background-color:#38803f;
+	-fx-text-fill: white;
+}
+
+.text-field{
+	-fx-background-color: #575757;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
