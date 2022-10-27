@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Directories{
 	
-	ArrayList<String> tempFilePaths = new ArrayList<String>();
-	ArrayList<String> tempFolderPaths = new ArrayList<String>();
+	static ArrayList<String> tempFilePaths = new ArrayList<String>();
+	static ArrayList<String> tempFolderPaths = new ArrayList<String>();
 		
 	public boolean filePathExist(String filePath) {
 		return(tempFilePaths.contains(filePath));

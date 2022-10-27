@@ -23,6 +23,12 @@ public class Preset {
 	
 	Directories DirectoryClass = new Directories();
 	
+	public void PresetHandler(String fileName) throws IOException {
+		PresetInitializer(fileName);
+		PresetInsertion(fileName, DirectoryClass.filePathGetter(), DirectoryClass.folderPathGetter());
+	}
+	
+	
 	//Creates a JSON file for the preset
 	public void PresetInitializer(String fileName) throws IOException {
 		FileWriter file = new FileWriter("preset/" + fileName + ".json");
@@ -47,6 +53,8 @@ public class Preset {
 		reader.write(object.toJSONString());
 		reader.flush();
 		reader.close();
+		
+		System.out.println("File Append");
 	}
 	
 	// Returns the preset paths in the JSON file

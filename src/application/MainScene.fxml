@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserInterface">
+<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserInterface">
    <top>
       <MenuBar fx:id="menuBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="0.0" BorderPane.alignment="CENTER">
         <menus>
@@ -78,7 +78,7 @@
               </rowConstraints>
                <children>
                   <TextField fx:id="presetTextField" alignment="CENTER" prefHeight="26.0" prefWidth="470.0" promptText="Enter name of preset" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
-                  <Button fx:id="presetAddButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Add Preset" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <Button fx:id="presetAddButton" mnemonicParsing="false" onAction="#addPreset" prefHeight="26.0" prefWidth="95.0" text="Add Preset" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">

@@ -31,6 +31,9 @@ public class UserInterface implements Initializable{
 	public ListView<String> DirectoryListView;
 	
 	@FXML
+	public ListView<String> presetListView;
+	
+	@FXML
 	private Label consoleLabel;
 	
 	@FXML
@@ -43,10 +46,22 @@ public class UserInterface implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DirectoryListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		consoleLabel.setText("Welcome to File Transfer FX");
+		presetListSet();
 	}
 	
 	Directories DirectoryClass = new Directories();
 	Preset PresetClass = new Preset();
+	
+	public void presetListSet() {
+		File directoryPath = new File("preset");
+		String contents[] = directoryPath.list();
+	      ObservableList<String> presetNames = presetListView.getItems();
+	      for(int i=0; i<contents.length; i++) {
+	    	  String presetName = (contents[i].substring(0, contents[i].lastIndexOf('.')));
+	    	  if (!presetNames.contains(presetName))
+	    		  presetListView.getItems().add(presetName);
+	      }
+	}
 	
 	public void menuBarHelpButton(ActionEvent event) {
 		try {
@@ -70,7 +85,7 @@ public class UserInterface implements Initializable{
 
 		if (SelectedFolder != null) {
 			String FolderPath = SelectedFolder.getAbsolutePath();
-			FolderPath = FolderPath.replace("\\" , "\\\\");
+			//FolderPath = FolderPath.replace("\\" , "\\\\");
 			folderPathHandler(FolderPath);
 			consoleLabelEdit("Added " +  FolderPath + " and its contents.");
 		}
@@ -147,7 +162,7 @@ public class UserInterface implements Initializable{
 	public void filePathHandler(List<File> selectedFiles) {
 		for (int i = 0; i < selectedFiles.size(); i++) {
 			String filePath = selectedFiles.get(i).getAbsolutePath();
-			filePath = filePath.replace("\\" , "\\\\");
+			//filePath = filePath.replace("\\" , "\\\\");
 			
 			if (DirectoryClass.filePathExist(filePath) == false) {
 				DirectoryListView.getItems().add(filePath);
@@ -183,5 +198,11 @@ public class UserInterface implements Initializable{
 				DirectoryClass.removeFolderPath(folderPath);
 			}
 		}
+	}
+	
+	public void addPreset(ActionEvent event) throws IOException {
+		String presetName = presetTextField.getText();
+		PresetClass.PresetHandler(presetName.replaceAll("\\s+",""));
+		presetListSet();
 	}
 }
