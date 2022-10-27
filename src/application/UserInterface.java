@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -32,6 +33,12 @@ public class UserInterface implements Initializable{
 	@FXML
 	private Label consoleLabel;
 	
+	@FXML
+	private TextField presetTextField;
+	
+	@FXML
+	private Button presetAddButton;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DirectoryListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -39,6 +46,7 @@ public class UserInterface implements Initializable{
 	}
 	
 	Directories DirectoryClass = new Directories();
+	Preset PresetClass = new Preset();
 	
 	public void menuBarHelpButton(ActionEvent event) {
 		try {

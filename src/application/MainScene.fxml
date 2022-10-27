@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserInterface">
+<BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserInterface">
    <top>
       <MenuBar fx:id="menuBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="0.0" BorderPane.alignment="CENTER">
         <menus>
@@ -54,6 +55,7 @@
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="589.6" />
             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="459.9999999999999" />
+            <ColumnConstraints />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="212.0" vgrow="ALWAYS" />
@@ -75,8 +77,43 @@
                 <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField alignment="CENTER" prefHeight="26.0" prefWidth="470.0" promptText="Enter name of preset" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
+                  <TextField fx:id="presetTextField" alignment="CENTER" prefHeight="26.0" prefWidth="470.0" promptText="Enter name of preset" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" />
                   <Button fx:id="presetAddButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Add Preset" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="345.0" />
+                <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" minWidth="10.0" prefWidth="115.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="24.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="presetAddButton1" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Browse" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <TextField alignment="CENTER" editable="false" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="321.0" promptText="Choose Destination" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Button fx:id="copyFilesButton" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="70.0" prefWidth="440.0" text="Copy Files" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <RadioButton mnemonicParsing="false" text="Overwrite Existing Files" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
                </children>
             </GridPane>
          </children>
@@ -85,8 +122,8 @@
    <bottom>
       <GridPane fx:id="menuBar" prefHeight="50.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1026.0" minWidth="10.0" prefWidth="1024.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="834.0" minWidth="10.0" prefWidth="126.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="918.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="834.0" minWidth="10.0" prefWidth="232.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -100,9 +137,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ProgressBar prefHeight="18.0" prefWidth="100.0" progress="0.0" visible="false" GridPane.columnIndex="1">
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.45" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <GridPane.margin>
-                  <Insets left="12.5" />
+                  <Insets right="10.0" />
                </GridPane.margin>
             </ProgressBar>
          </children>
