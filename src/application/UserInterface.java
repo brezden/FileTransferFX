@@ -2,7 +2,9 @@ package application;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -24,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import org.apache.commons.io.FileUtils;
 
 public class UserInterface implements Initializable{
 	
@@ -58,7 +61,13 @@ public class UserInterface implements Initializable{
 	      ObservableList<String> presetNames = presetListView.getItems();
 	      for(int i=0; i<contents.length; i++) {
 	    	  String presetName = (contents[i].substring(0, contents[i].lastIndexOf('.')));
-	    	  if (!presetNames.contains(presetName))
+	    	  File presetFile = new File("preset/" + presetName + ".json");
+	    	  
+	    	  if (presetFile.length() == 0) {
+	    		  presetFile.delete();
+	    	  }
+	    	  
+	    	  else if (!presetNames.contains(presetName))
 	    		  presetListView.getItems().add(presetName);
 	      }
 	}
@@ -201,8 +210,36 @@ public class UserInterface implements Initializable{
 	}
 	
 	public void addPreset(ActionEvent event) throws IOException {
-		String presetName = presetTextField.getText();
+		
+		if (DirectoryListView.getItems().isEmpty() || (DirectoryListView.getItems().size() <= 1)) {
+			consoleLabelEdit("Must have atleast 2 files or folders added");
+			return;
+		}
+		
+		String inputPresentName = presetTextField.getText();
+		String presetName = inputPresentName.replaceAll("\\s+","");
+		
+		if (presetName.length() < 1) {
+			consoleLabelEdit("Enter a name for the preset in the text box");
+			return;
+		}
+
 		PresetClass.PresetHandler(presetName.replaceAll("\\s+",""));
-		presetListSet();
+		
+		if (!presetListView.getItems().contains(presetName)) {
+			presetListView.getItems().add(presetName);
+			consoleLabelEdit("Created preset with the name " + presetName);
+		}
+		
+		else {
+			consoleLabelEdit("Edited preset with the name " + presetName);
+		}
+	}
+	
+	public void removePreset(ActionEvent event) throws IOException {
+		String fileRemoveObject = presetListView.getSelectionModel().getSelectedItem();
+		FileWriter file = new FileWriter("preset/" + fileRemoveObject + ".json");
+		presetListView.getItems().remove(fileRemoveObject);
+		consoleLabelEdit("Removed " + fileRemoveObject + " preset");
 	}
 }
