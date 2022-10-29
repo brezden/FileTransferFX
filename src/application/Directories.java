@@ -6,6 +6,8 @@ public class Directories{
 	
 	static ArrayList<String> tempFilePaths = new ArrayList<String>();
 	static ArrayList<String> tempFolderPaths = new ArrayList<String>();
+	static String directoryDestination;
+	static boolean ExistingFileStatus = false; //Default is false
 		
 	public boolean filePathExist(String filePath) {
 		return(tempFilePaths.contains(filePath));
@@ -21,6 +23,18 @@ public class Directories{
 	
 	public ArrayList<String> folderPathGetter(){
 		return tempFolderPaths;
+	}
+	
+	public String directoryDestinationGetter() {
+		return directoryDestination;
+	}
+	
+	public void directoryDestinationSetter(String directoryPath) {
+		directoryDestination = directoryPath;
+	}
+	
+	public void ExistingValueSetter(boolean status) {
+		ExistingFileStatus = status;
 	}
 	
 	public void addFilePath(String filePath) {

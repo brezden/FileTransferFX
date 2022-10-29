@@ -92,8 +92,8 @@
                 <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="presetAddButton1" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Browse" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                  <TextField alignment="CENTER" editable="false" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="321.0" promptText="Choose Destination" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                  <Button fx:id="presetAddButton" mnemonicParsing="false" onAction="#chooseDestination" prefHeight="26.0" prefWidth="95.0" text="Browse" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                  <TextField fx:id="destinationField" alignment="CENTER" editable="false" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="321.0" promptText="Choose Destination" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                      <padding>
                         <Insets left="20.0" />
                      </padding>
@@ -109,7 +109,7 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Button>
-                  <RadioButton mnemonicParsing="false" text="Overwrite Existing Files" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2">
+                  <RadioButton fx:id="ExistingFileStatus" mnemonicParsing="false" onAction="#ExistingFileStatusSetter" text="Overwrite Existing Files" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2">
                      <font>
                         <Font size="13.0" />
                      </font>

@@ -21,9 +21,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
@@ -48,6 +50,12 @@ public class UserInterface implements Initializable{
 	
 	@FXML
 	private Button presetAddButton;
+	
+	@FXML
+	private TextField destinationField;
+	
+	@FXML
+	private RadioButton ExistingFileStatus;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -267,5 +275,39 @@ public class UserInterface implements Initializable{
 		}
 		
 		consoleLabelEdit("Loaded " + preset + " preset");
+	}
+	
+	public void chooseDestination(ActionEvent event) {
+		DirectoryChooser FolderDestination = new DirectoryChooser();
+		FolderDestination.setTitle("Select Destination");
+		
+		File SelectedFolderDestination = FolderDestination.showDialog(null);
+		
+		if (SelectedFolderDestination != null) {
+			destinationField.setAlignment(Pos.CENTER_LEFT);
+			String FolderDestinationPath = SelectedFolderDestination.getAbsolutePath();
+			DirectoryClass.directoryDestinationSetter(FolderDestinationPath);
+			destinationField.setText(FolderDestinationPath);
+			consoleLabelEdit("Set Destination to " + FolderDestinationPath);
+			return;
+		}
+		
+		consoleLabelEdit("Choose a valid destination");
+	}
+	
+	//Calls the function to set the existing value status
+	public void ExistingFileStatusSetter(ActionEvent event) {
+		DirectoryClass.ExistingValueSetter(ExistingFileStatus.isSelected());
+		String value;
+		
+		//Setting the console output to the corresponding value
+		if (ExistingFileStatus.isSelected()) {
+			value = "On";
+		}
+		else {
+			value = "Off";
+		}
+		
+		consoleLabelEdit("Turned " + value + " Overwrite Existing Files");
 	}
 }
