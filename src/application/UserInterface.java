@@ -9,6 +9,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +30,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import org.apache.commons.io.FileUtils;
+import org.json.simple.parser.ParseException;
 
 public class UserInterface implements Initializable{
 	
@@ -237,9 +241,31 @@ public class UserInterface implements Initializable{
 	}
 	
 	public void removePreset(ActionEvent event) throws IOException {
-		String fileRemoveObject = presetListView.getSelectionModel().getSelectedItem();
-		FileWriter file = new FileWriter("preset/" + fileRemoveObject + ".json");
-		presetListView.getItems().remove(fileRemoveObject);
-		consoleLabelEdit("Removed " + fileRemoveObject + " preset");
+		String preset = presetListView.getSelectionModel().getSelectedItem();
+		FileWriter file = new FileWriter("preset/" + preset + ".json");
+		presetListView.getItems().remove(preset);
+		consoleLabelEdit("Removed " + preset + " preset");
+	}
+	
+	public void loadPresetList(ActionEvent event) throws IOException, ParseException {
+		String preset = presetListView.getSelectionModel().getSelectedItem();
+		List<String> presetList = PresetClass.PresetGetter(preset);
+		DirectoryListView.getItems().clear();
+		DirectoryClass.clearFilePaths();
+		DirectoryClass.clearFolderPaths();
+		
+		for (int i = 0; i < presetList.size(); i++) {
+			String directoryStringPath = presetList.get(i);
+			Path directoryPath = Paths.get(directoryStringPath);
+			if (Files.isDirectory(directoryPath)) {
+				DirectoryClass.addFolderPath(directoryStringPath);
+			}
+			else {
+				DirectoryClass.addFilePath(directoryStringPath);
+			}
+			DirectoryListView.getItems().add(directoryStringPath);
+		}
+		
+		consoleLabelEdit("Loaded " + preset + " preset");
 	}
 }

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class DirectoriesTest {
-	
+		
 	Directories testClass = new Directories();
-
+	
 	@Test // Adding and removing a file
 	public void fileListInsertDelete() {
 		testClass.addFilePath("C:\\Java.txt");

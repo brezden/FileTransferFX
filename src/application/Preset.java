@@ -28,7 +28,6 @@ public class Preset {
 		PresetInsertion(fileName, DirectoryClass.filePathGetter(), DirectoryClass.folderPathGetter());
 	}
 	
-	
 	//Creates a JSON file for the preset
 	public void PresetInitializer(String fileName) throws IOException {
 		FileWriter file = new FileWriter("preset/" + fileName + ".json");
@@ -46,7 +45,7 @@ public class Preset {
 		for (int i = 0; i < folderPaths.size(); i++) {
 			array.add(folderPaths.get(i));
 		}
-
+		
 		object.put(fileName, array);
 		
 		FileWriter reader = new FileWriter("preset/" + fileName + ".json");
