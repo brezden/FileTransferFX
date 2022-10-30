@@ -18,7 +18,7 @@
 
 <BorderPane fx:id="borderPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.UserInterface">
    <top>
-      <MenuBar fx:id="menuBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+      <MenuBar fx:id="topMenubar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="0.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu fx:id="menuText" mnemonicParsing="false" text="Add">
             <items>
@@ -137,7 +137,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.45" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin>

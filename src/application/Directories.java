@@ -8,7 +8,7 @@ public class Directories{
 	static ArrayList<String> tempFolderPaths = new ArrayList<String>();
 	static String directoryDestination;
 	static boolean ExistingFileStatus = false; //Default is false
-		
+
 	public boolean filePathExist(String filePath) {
 		return(tempFilePaths.contains(filePath));
 	}

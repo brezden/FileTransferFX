@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -52,10 +55,20 @@ public class UserInterface implements Initializable{
 	private Button presetAddButton;
 	
 	@FXML
+	private MenuBar topMenubar;
+	
+	@FXML
 	private TextField destinationField;
 	
 	@FXML
 	private RadioButton ExistingFileStatus;
+	
+	@FXML
+	private ProgressBar progressBar;
+	
+	static double progressBarStatus = 0.0;
+	static double progressBarIncrement = 0.0;
+	static boolean transferStatus = true;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -66,7 +79,10 @@ public class UserInterface implements Initializable{
 	
 	Directories DirectoryClass = new Directories();
 	Preset PresetClass = new Preset();
-	FileHelper FileHelperClass = new FileHelper();
+	
+	public void menuBarSetter(boolean status) {
+		topMenubar.setDisable(status);
+	}
 	
 	public void presetListSet() {
 		File directoryPath = new File("preset");
@@ -323,8 +339,74 @@ public class UserInterface implements Initializable{
 	}
 	
 	//Method that calls on the helper class to transfer the files
-	public void copyFilesButton(ActionEvent event) {
-		FileHelperClass.FileCopy(DirectoryClass.filePathGetter(), DirectoryClass.directoryDestinationGetter());
-		FileHelperClass.FolderCopy(DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
+	public void copyFilesButton(ActionEvent event) throws InterruptedException {
+		setProgressBar();
+		menuBarSetter(true);
+
+		FileCopy(DirectoryClass.filePathGetter(), DirectoryClass.directoryDestinationGetter());
+		FolderCopy(DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
+		
+		menuBarSetter(false);
+		consoleLabelEdit("Copying is complete!");
+	}
+	
+	public void setProgressBar() {
+		progressBar.setVisible(true);
+		progressBarStatus = 0.0; // Reset Progress Bar
+		progressBar.setProgress(progressBarStatus);
+		int totalTransfers = DirectoryClass.filePathGetter().size() + DirectoryClass.folderPathGetter().size();
+		progressBarIncrement = 1.0 / totalTransfers;
+	}
+	
+	public void increaseProgressBar() {
+		progressBarStatus += progressBarIncrement;
+		progressBar.setProgress(progressBarStatus);
+	}
+	
+	public void resetProgressBar() {
+		progressBar.setVisible(false);
+		progressBarStatus = 0.0;
+		progressBar.setProgress(progressBarStatus);
+	}
+	
+	//Method that will copy all files over to destination
+	public void FileCopy(ArrayList<String> fileList, String fileDestination) throws InterruptedException {
+		int arraySize = fileList.size();
+		File destination = new File(fileDestination);
+		
+		for (int i = 0; i < arraySize; i++) {
+			String filePath = fileList.get(i);
+			File source = new File(filePath);
+			
+			consoleLabelEdit("Copying " + filePath + " file");
+			
+			try {
+			    FileUtils.copyFileToDirectory(source, destination);
+			} catch (IOException e) {
+			    e.printStackTrace();
+			}
+			
+			increaseProgressBar();
+		}
+	}
+	
+	//Method that will copy all folders and contents over to destination
+	public void FolderCopy(ArrayList<String> folderList, String folderDestination) throws InterruptedException {
+		int arraySize = folderList.size();
+		File destination = new File(folderDestination);
+		
+		for (int i = 0; i < arraySize; i++) {
+			String folderPath = folderList.get(i);
+			consoleLabelEdit("Copying " + folderPath +" and all the content included");
+			File source = new File(folderPath);
+						
+			try {
+			    FileUtils.copyDirectoryToDirectory(source, destination);
+			} catch (IOException e) {
+			    e.printStackTrace();
+			}
+			
+			increaseProgressBar();
+		}
 	}
 }
