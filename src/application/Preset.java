@@ -22,7 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Preset {
 	
 	Directories DirectoryClass = new Directories();
-	
+
+	//Runs all the required methods to make and insert to a JSON file
 	public void PresetHandler(String fileName) throws IOException {
 		PresetInitializer(fileName);
 		PresetInsertion(fileName, DirectoryClass.filePathGetter(), DirectoryClass.folderPathGetter());
@@ -33,7 +34,7 @@ public class Preset {
 		FileWriter file = new FileWriter("preset/" + fileName + ".json");
 	}
 	
-	// Inserts all the directories into the preset value
+	//Inserts all the directories into the preset value
 	public void PresetInsertion(String fileName, ArrayList<String> filePaths,  ArrayList<String> folderPaths) throws IOException {
 		JSONObject object = new JSONObject();
 		JSONArray array = new JSONArray();

@@ -101,7 +101,7 @@
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="copyFilesButton" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="70.0" prefWidth="440.0" text="Copy Files" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="copyFilesButton" alignment="CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#copyFilesButton" prefHeight="70.0" prefWidth="440.0" text="Copy Files" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font size="19.0" />
                      </font>

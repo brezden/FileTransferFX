@@ -66,6 +66,7 @@ public class UserInterface implements Initializable{
 	
 	Directories DirectoryClass = new Directories();
 	Preset PresetClass = new Preset();
+	FileHelper FileHelperClass = new FileHelper();
 	
 	public void presetListSet() {
 		File directoryPath = new File("preset");
@@ -231,33 +232,41 @@ public class UserInterface implements Initializable{
 		String inputPresentName = presetTextField.getText();
 		String presetName = inputPresentName.replaceAll("\\s+","");
 		
+		//Checking if the preset name is not long enough
 		if (presetName.length() < 1) {
 			consoleLabelEdit("Enter a name for the preset in the text box");
 			return;
 		}
-
+		
+		//Removing all the whitespace in the preset name
 		PresetClass.PresetHandler(presetName.replaceAll("\\s+",""));
 		
+		//Checking if the preset name exists in the list
 		if (!presetListView.getItems().contains(presetName)) {
 			presetListView.getItems().add(presetName);
 			consoleLabelEdit("Created preset with the name " + presetName);
 		}
 		
+		//If the name does exist then we change the console log to show "Edited"
 		else {
 			consoleLabelEdit("Edited preset with the name " + presetName);
 		}
 	}
 	
+	//Removes the preset that is selected
 	public void removePreset(ActionEvent event) throws IOException {
 		String preset = presetListView.getSelectionModel().getSelectedItem();
+		//Making the file empty so we can delete it when the program is restarted
 		FileWriter file = new FileWriter("preset/" + preset + ".json");
 		presetListView.getItems().remove(preset);
 		consoleLabelEdit("Removed " + preset + " preset");
 	}
 	
+	//Loads the preset into the list and assigns the values to the correct list
 	public void loadPresetList(ActionEvent event) throws IOException, ParseException {
 		String preset = presetListView.getSelectionModel().getSelectedItem();
 		List<String> presetList = PresetClass.PresetGetter(preset);
+		//Clearing lists and previous paths
 		DirectoryListView.getItems().clear();
 		DirectoryClass.clearFilePaths();
 		DirectoryClass.clearFolderPaths();
@@ -265,12 +274,14 @@ public class UserInterface implements Initializable{
 		for (int i = 0; i < presetList.size(); i++) {
 			String directoryStringPath = presetList.get(i);
 			Path directoryPath = Paths.get(directoryStringPath);
+			//Checking if the path is a directory or a file
 			if (Files.isDirectory(directoryPath)) {
 				DirectoryClass.addFolderPath(directoryStringPath);
 			}
 			else {
 				DirectoryClass.addFilePath(directoryStringPath);
 			}
+			//Adding the path to the list
 			DirectoryListView.getItems().add(directoryStringPath);
 		}
 		
@@ -284,7 +295,7 @@ public class UserInterface implements Initializable{
 		File SelectedFolderDestination = FolderDestination.showDialog(null);
 		
 		if (SelectedFolderDestination != null) {
-			destinationField.setAlignment(Pos.CENTER_LEFT);
+			destinationField.setAlignment(Pos.CENTER_LEFT); // Changing the align to left for the text field
 			String FolderDestinationPath = SelectedFolderDestination.getAbsolutePath();
 			DirectoryClass.directoryDestinationSetter(FolderDestinationPath);
 			destinationField.setText(FolderDestinationPath);
@@ -309,5 +320,11 @@ public class UserInterface implements Initializable{
 		}
 		
 		consoleLabelEdit("Turned " + value + " Overwrite Existing Files");
+	}
+	
+	//Method that calls on the helper class to transfer the files
+	public void copyFilesButton(ActionEvent event) {
+		FileHelperClass.FileCopy(DirectoryClass.filePathGetter(), DirectoryClass.directoryDestinationGetter());
+		FileHelperClass.FolderCopy(DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
 	}
 }
