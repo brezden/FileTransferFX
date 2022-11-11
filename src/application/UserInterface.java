@@ -272,36 +272,42 @@ public class UserInterface implements Initializable{
 	//Removes the preset that is selected
 	public void removePreset(ActionEvent event) throws IOException {
 		String preset = presetListView.getSelectionModel().getSelectedItem();
-		//Making the file empty so we can delete it when the program is restarted
-		FileWriter file = new FileWriter("preset/" + preset + ".json");
-		presetListView.getItems().remove(preset);
-		consoleLabelEdit("Removed " + preset + " preset");
+		
+		if (!(preset == null)) {
+			//Making the file empty so we can delete it when the program is restarted
+			FileWriter file = new FileWriter("preset/" + preset + ".json");
+			presetListView.getItems().remove(preset);
+			consoleLabelEdit("Removed " + preset + " preset");
+		}
 	}
 	
 	//Loads the preset into the list and assigns the values to the correct list
 	public void loadPresetList(ActionEvent event) throws IOException, ParseException {
 		String preset = presetListView.getSelectionModel().getSelectedItem();
-		List<String> presetList = PresetClass.PresetGetter(preset);
-		//Clearing lists and previous paths
-		DirectoryListView.getItems().clear();
-		DirectoryClass.clearFilePaths();
-		DirectoryClass.clearFolderPaths();
 		
-		for (int i = 0; i < presetList.size(); i++) {
-			String directoryStringPath = presetList.get(i);
-			Path directoryPath = Paths.get(directoryStringPath);
-			//Checking if the path is a directory or a file
-			if (Files.isDirectory(directoryPath)) {
-				DirectoryClass.addFolderPath(directoryStringPath);
+		if (!(preset == null)) {
+			List<String> presetList = PresetClass.PresetGetter(preset);
+			//Clearing lists and previous paths
+			DirectoryListView.getItems().clear();
+			DirectoryClass.clearFilePaths();
+			DirectoryClass.clearFolderPaths();
+			
+			for (int i = 0; i < presetList.size(); i++) {
+				String directoryStringPath = presetList.get(i);
+				Path directoryPath = Paths.get(directoryStringPath);
+				//Checking if the path is a directory or a file
+				if (Files.isDirectory(directoryPath)) {
+					DirectoryClass.addFolderPath(directoryStringPath);
+				}
+				else {
+					DirectoryClass.addFilePath(directoryStringPath);
+				}
+				//Adding the path to the list
+				DirectoryListView.getItems().add(directoryStringPath);
 			}
-			else {
-				DirectoryClass.addFilePath(directoryStringPath);
-			}
-			//Adding the path to the list
-			DirectoryListView.getItems().add(directoryStringPath);
+			
+			consoleLabelEdit("Loaded " + preset + " preset");
 		}
-		
-		consoleLabelEdit("Loaded " + preset + " preset");
 	}
 	
 	public void chooseDestination(ActionEvent event) {
@@ -340,35 +346,22 @@ public class UserInterface implements Initializable{
 	
 	//Method that calls on the helper class to transfer the files
 	public void copyFilesButton(ActionEvent event) throws InterruptedException {
-		setProgressBar();
 		menuBarSetter(true);
 
-		FileCopy(DirectoryClass.filePathGetter(), DirectoryClass.directoryDestinationGetter());
-		FolderCopy(DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
+		TransferTask transferTask = new TransferTask(100);
+		
+		progressBar.progressProperty().bind(transferTask.progressProperty());
+		transferTask.valueProperty().addListener((observable, oldValue, newValue) -> consoleLabel.setText(String.valueOf(newValue)));
+		
+		Thread th = new Thread(transferTask);
+		th.setDaemon(true);
+		th.start();
+		
 		
 		menuBarSetter(false);
 		consoleLabelEdit("Copying is complete!");
 	}
-	
-	public void setProgressBar() {
-		progressBar.setVisible(true);
-		progressBarStatus = 0.0; // Reset Progress Bar
-		progressBar.setProgress(progressBarStatus);
-		int totalTransfers = DirectoryClass.filePathGetter().size() + DirectoryClass.folderPathGetter().size();
-		progressBarIncrement = 1.0 / totalTransfers;
-	}
-	
-	public void increaseProgressBar() {
-		progressBarStatus += progressBarIncrement;
-		progressBar.setProgress(progressBarStatus);
-	}
-	
-	public void resetProgressBar() {
-		progressBar.setVisible(false);
-		progressBarStatus = 0.0;
-		progressBar.setProgress(progressBarStatus);
-	}
-	
+
 	//Method that will copy all files over to destination
 	public void FileCopy(ArrayList<String> fileList, String fileDestination) throws InterruptedException {
 		int arraySize = fileList.size();
