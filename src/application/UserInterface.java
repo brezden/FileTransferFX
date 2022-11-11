@@ -66,10 +66,6 @@ public class UserInterface implements Initializable{
 	@FXML
 	private ProgressBar progressBar;
 	
-	static double progressBarStatus = 0.0;
-	static double progressBarIncrement = 0.0;
-	static boolean transferStatus = true;
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DirectoryListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -80,9 +76,6 @@ public class UserInterface implements Initializable{
 	Directories DirectoryClass = new Directories();
 	Preset PresetClass = new Preset();
 	
-	public void menuBarSetter(boolean status) {
-		topMenubar.setDisable(status);
-	}
 	
 	public void presetListSet() {
 		File directoryPath = new File("preset");
@@ -346,60 +339,14 @@ public class UserInterface implements Initializable{
 	
 	//Method that calls on the helper class to transfer the files
 	public void copyFilesButton(ActionEvent event) throws InterruptedException {
-		menuBarSetter(true);
-
-		TransferTask transferTask = new TransferTask(100);
+		TransferTask transferTask = new TransferTask(topMenubar, progressBar, DirectoryClass.filePathGetter(), 
+													 DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
 		
 		progressBar.progressProperty().bind(transferTask.progressProperty());
 		transferTask.valueProperty().addListener((observable, oldValue, newValue) -> consoleLabel.setText(String.valueOf(newValue)));
-		
+
 		Thread th = new Thread(transferTask);
 		th.setDaemon(true);
 		th.start();
-		
-		
-		menuBarSetter(false);
-		consoleLabelEdit("Copying is complete!");
-	}
-
-	//Method that will copy all files over to destination
-	public void FileCopy(ArrayList<String> fileList, String fileDestination) throws InterruptedException {
-		int arraySize = fileList.size();
-		File destination = new File(fileDestination);
-		
-		for (int i = 0; i < arraySize; i++) {
-			String filePath = fileList.get(i);
-			File source = new File(filePath);
-			
-			consoleLabelEdit("Copying " + filePath + " file");
-			
-			try {
-			    FileUtils.copyFileToDirectory(source, destination);
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
-			
-			increaseProgressBar();
-		}
-	}
-	
-	//Method that will copy all folders and contents over to destination
-	public void FolderCopy(ArrayList<String> folderList, String folderDestination) throws InterruptedException {
-		int arraySize = folderList.size();
-		File destination = new File(folderDestination);
-		
-		for (int i = 0; i < arraySize; i++) {
-			String folderPath = folderList.get(i);
-			consoleLabelEdit("Copying " + folderPath +" and all the content included");
-			File source = new File(folderPath);
-						
-			try {
-			    FileUtils.copyDirectoryToDirectory(source, destination);
-			} catch (IOException e) {
-			    e.printStackTrace();
-			}
-			
-			increaseProgressBar();
-		}
 	}
 }

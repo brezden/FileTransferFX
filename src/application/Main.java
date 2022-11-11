@@ -20,7 +20,6 @@ public class Main extends Application {
 		primaryStage.setHeight(650);
 		primaryStage.setWidth(1150);
 		
-
 		Image programIcon = new Image("images/fileTransferFXLogo.png");
 		primaryStage.getIcons().add(programIcon);
 		
