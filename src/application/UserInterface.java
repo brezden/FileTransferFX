@@ -66,6 +66,12 @@ public class UserInterface implements Initializable{
 	@FXML
 	private ProgressBar progressBar;
 	
+	@FXML
+	private Button copyFilesButton;
+	
+	@FXML
+	private Button browseButton;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DirectoryListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -339,8 +345,9 @@ public class UserInterface implements Initializable{
 	
 	//Method that calls on the helper class to transfer the files
 	public void copyFilesButton(ActionEvent event) throws InterruptedException {
-		TransferTask transferTask = new TransferTask(topMenubar, progressBar, DirectoryClass.filePathGetter(), 
-													 DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter());
+		TransferTask transferTask = new TransferTask(ExistingFileStatus.isSelected(), topMenubar, progressBar, DirectoryClass.filePathGetter(), 
+													 DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter(),
+													 presetAddButton, ExistingFileStatus, copyFilesButton, browseButton);
 		
 		progressBar.progressProperty().bind(transferTask.progressProperty());
 		transferTask.valueProperty().addListener((observable, oldValue, newValue) -> consoleLabel.setText(String.valueOf(newValue)));

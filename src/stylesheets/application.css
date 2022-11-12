@@ -79,6 +79,11 @@
 	-fx-text-fill: white;
 }
 
+#browseButton{
+	-fx-background-color:#4D4D4D;
+	-fx-text-fill: white;
+}
+
 #copyFilesButton{
 	-fx-background-color: #38803f;
 	-fx-text-fill: white;
