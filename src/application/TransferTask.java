@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.CopyOption;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
@@ -56,6 +57,7 @@ public class TransferTask extends Task{
 		int progressSum = folderList.size()  + fileList.size();
 		int progressStatus = 0;
 		int transferCompleted = 0;
+		int fileNotFound = 0;
 		int fileArraySize = fileList.size();
 		int folderArraySize = folderList.size();
 				
@@ -67,15 +69,18 @@ public class TransferTask extends Task{
 				String filePath = fileList.get(i);
 				File source = new File(filePath);
 				
-				updateValue("Copying " + filePath + " file");
-				
-				try {
-				    FileUtils.copyFileToDirectory(source, destination);
-				} catch (IOException e) {
-				    e.printStackTrace();
+				if (source.exists() && (source.toString().equals(destination.toString()))) {
+					updateValue("Copying " + filePath + " file");
+					
+					try {
+					    FileUtils.copyFileToDirectory(source, destination);
+					} catch (IOException e) {
+					    e.printStackTrace();
+					}
+					
+					transferCompleted++;
 				}
 				
-				transferCompleted++;
 				progressStatus++;
 				updateProgress(progressStatus, progressSum);
 			}
@@ -87,49 +92,13 @@ public class TransferTask extends Task{
 				updateValue("Copying " + folderPath +" and all the content included");
 				
 				File tempFolder = (new File(destination.toString() + "\\" +  folderPath.substring(folderPath.lastIndexOf("\\") + 1).trim()));
-				
-				if (tempFolder.exists()) {
-					FileUtils.deleteDirectory(tempFolder);
-				}
-				
-				try {
-				    FileUtils.copyDirectoryToDirectory(source, destination);
-				} catch (IOException e) {
-				    e.printStackTrace();
-				}
-				
-				transferCompleted++;
-				progressStatus++;
-				updateProgress(progressStatus, progressSum);
-			}
-		}
-		
-		// Methods for skipping existing files
-		else {
-			for (int i = 0; i < fileArraySize; i++) {
-				String filePath = fileList.get(i);
-				File source = new File(filePath);
+				String result = folderPath.substring(0, folderPath.indexOf("\\"));
 
-				if (!(new File(destination.toString() + "\\" +  filePath.substring(filePath.lastIndexOf("\\") + 1).trim()).exists())) {
-					updateValue("Copying " + filePath + " file");
-					try {
-					    FileUtils.copyFileToDirectory(source, destination);
-					} catch (IOException e) {
-					    e.printStackTrace();
+				if (source.exists() && (!(destination.toString().equals(Paths.get(folderPath).getParent().toString())))) {
+
+					if (tempFolder.exists()) {
+						FileUtils.deleteDirectory(tempFolder);
 					}
-					transferCompleted++;
-				}
-
-				progressStatus++;
-				updateProgress(progressStatus, progressSum);
-			}
-			
-			for (int i = 0; i < folderArraySize; i++) {
-				String folderPath = folderList.get(i);
-				File source = new File(folderPath);
-								
-				if (!(new File(destination.toString() + "\\" +  folderPath.substring(folderPath.lastIndexOf("\\") + 1).trim()).exists())) {
-					updateValue("Copying " + folderPath +" and all the content included");
 					
 					try {
 					    FileUtils.copyDirectoryToDirectory(source, destination);
@@ -145,6 +114,54 @@ public class TransferTask extends Task{
 			}
 		}
 		
+		// Methods for skipping existing files
+		else {
+			for (int i = 0; i < fileArraySize; i++) {
+				String filePath = fileList.get(i);
+				File source = new File(filePath);
+				
+				if (source.toString().equals(destination.toString())) {
+					if ((!(new File(destination.toString() + "\\" +  filePath.substring(filePath.lastIndexOf("\\") + 1).trim()).exists())) && source.exists()) {
+						updateValue("Copying " + filePath + " file");
+						try {
+						    FileUtils.copyFileToDirectory(source, destination);
+						} catch (IOException e) {
+						    e.printStackTrace();
+						    fileNotFound++;
+						}
+						
+						
+						transferCompleted++;
+					}
+				}
+
+				progressStatus++;
+				updateProgress(progressStatus, progressSum);
+			}
+			
+			for (int i = 0; i < folderArraySize; i++) {
+				String folderPath = folderList.get(i);
+				File source = new File(folderPath);
+					
+				if (!(destination.toString().equals(Paths.get(folderPath).getParent().toString()))) {
+					if ((!(new File(destination.toString() + "\\" +  folderPath.substring(folderPath.lastIndexOf("\\") + 1).trim()).exists())) && source.exists()) {
+						updateValue("Copying " + folderPath +" and all the content included");
+						
+						try {
+						    FileUtils.copyDirectoryToDirectory(source, destination);
+						} catch (IOException e) {
+						    e.printStackTrace();
+						    fileNotFound++;
+						}
+						
+						transferCompleted++;
+					}
+				}
+				progressStatus++;
+				updateProgress(progressStatus, progressSum);
+			}
+		}
+		
 		progressBar.setVisible(false);
 		topMenubar.setDisable(false);
 		presetAddButton.setDisable(false);
@@ -152,8 +169,12 @@ public class TransferTask extends Task{
 		copyFilesButton.setDisable(false);
 		browseButton.setDisable(false);
 		
-		if ((progressStatus - transferCompleted) > 0){
-			return ("Completed Copying. Skipped " + (progressStatus - transferCompleted) + " due to file or folder existing");
+		if ((progressStatus - transferCompleted) > 1){
+			return ("Completed Copying. Skipped " + (progressStatus - transferCompleted) + " copies due to path already existing or not being found");
+		}
+		
+		else if ((progressStatus - transferCompleted) == 1){
+			return ("Completed Copying. Skipped 1 copy due to path already existing or not being found");
 		}
 		
 		return "Completed Copying";

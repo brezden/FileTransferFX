@@ -75,13 +75,12 @@ public class UserInterface implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		DirectoryListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		consoleLabel.setText("Welcome to File Transfer FX");
+		consoleLabel.setText("Welcome to File Transfer FX (Version 1.0.0)");
 		presetListSet();
 	}
 	
 	Directories DirectoryClass = new Directories();
 	Preset PresetClass = new Preset();
-	
 	
 	public void presetListSet() {
 		File directoryPath = new File("preset");
@@ -345,15 +344,19 @@ public class UserInterface implements Initializable{
 	
 	//Method that calls on the helper class to transfer the files
 	public void copyFilesButton(ActionEvent event) throws InterruptedException {
-		TransferTask transferTask = new TransferTask(ExistingFileStatus.isSelected(), topMenubar, progressBar, DirectoryClass.filePathGetter(), 
-													 DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter(),
-													 presetAddButton, ExistingFileStatus, copyFilesButton, browseButton);
-		
-		progressBar.progressProperty().bind(transferTask.progressProperty());
-		transferTask.valueProperty().addListener((observable, oldValue, newValue) -> consoleLabel.setText(String.valueOf(newValue)));
+		if (DirectoryClass.directoryDestinationGetter() != null) {
+			TransferTask transferTask = new TransferTask(ExistingFileStatus.isSelected(), topMenubar, progressBar, DirectoryClass.filePathGetter(), 
+					 DirectoryClass.folderPathGetter(), DirectoryClass.directoryDestinationGetter(),
+					 presetAddButton, ExistingFileStatus, copyFilesButton, browseButton);
 
-		Thread th = new Thread(transferTask);
-		th.setDaemon(true);
-		th.start();
+			progressBar.progressProperty().bind(transferTask.progressProperty());
+			transferTask.valueProperty().addListener((observable, oldValue, newValue) -> consoleLabel.setText(String.valueOf(newValue)));
+			
+			Thread th = new Thread(transferTask);
+			th.setDaemon(true);
+			th.start();
+		}
+		
+		else consoleLabelEdit("Please choose a destination");
 	}
 }
