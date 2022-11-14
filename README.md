@@ -3,8 +3,13 @@
 File Transfer FX (In Progress)
 =============
 
-File Transfer application used to backup and organize files. Features will include:
+File Transfer application used to backup and organize files.
 
-1.) Allowing you to automatically overwrite and replace old files. \
-2.) Automatically create a folder containing a custom title storing new changes to files. \
-3.) Warnings when a file has been updated and not backed up.
+Screenshots
+=============
+
+![name-of-giphy.gif](https://media.giphy.com/media/UNEzDOpCS2vuEu3ZzQ/giphy.gif)
+
+<div align="center"><b>Transfer In Progress</b></div>
+<br>
+<img src="https://drive.google.com/uc?export=view&id=1cVwnXfPiRaiiDJgu7gJV8TTgq-uBqvdg" align="center" />
