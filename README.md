@@ -8,8 +8,13 @@ File Transfer application used to backup and organize files.
 Screenshots
 =============
 
-![name-of-giphy.gif](https://media.giphy.com/media/UNEzDOpCS2vuEu3ZzQ/giphy.gif)
-
+<div align="center">
+    <img src="https://media.giphy.com/media/H0gKfdHjyTeUznFtyC/giphy.gif">
+    <img src="https://media.giphy.com/media/hnlJRaGo6C9x7is8V3/giphy.gif">
+    <img src="https://media.giphy.com/media/UNEzDOpCS2vuEu3ZzQ/giphy.gif">
+    <img src="https://media.giphy.com/media/KJ7tD5PORdJKO3yOf1/giphy.gif">
+</div>
+  
 <div align="center"><b>Transfer In Progress</b></div>
 <br>
 <img src="https://drive.google.com/uc?export=view&id=1cVwnXfPiRaiiDJgu7gJV8TTgq-uBqvdg" align="center" />
