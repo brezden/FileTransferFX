@@ -69,7 +69,7 @@ public class TransferTask extends Task{
 				String filePath = fileList.get(i);
 				File source = new File(filePath);
 				
-				if (source.exists() && (source.toString().equals(destination.toString()))) {
+				if (source.exists() && (!(source.toString().equals(destination.toString())))) {
 					updateValue("Copying " + filePath + " file");
 					
 					try {
@@ -120,7 +120,7 @@ public class TransferTask extends Task{
 				String filePath = fileList.get(i);
 				File source = new File(filePath);
 				
-				if (source.toString().equals(destination.toString())) {
+				if (!(source.toString().equals(destination.toString()))) {
 					if ((!(new File(destination.toString() + "\\" +  filePath.substring(filePath.lastIndexOf("\\") + 1).trim()).exists())) && source.exists()) {
 						updateValue("Copying " + filePath + " file");
 						try {
