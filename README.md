@@ -6,6 +6,7 @@
 ## Project Description
  
 File Transfer FX is a Windows based application that is used to backup directories from your computer to another location. Users will be able to save presets containing all the files and folders that need to be backed up regularly. Editing the content you want backed up is made easy due to the efficient user interface.
+<a href="https://media.githubusercontent.com/media/brezden/FileTransferFX/main/FileTransferFX_Setup.exe" target="_blank">WordPress Homepage</a>
 
 ## Screenshots
 <div align="center">
