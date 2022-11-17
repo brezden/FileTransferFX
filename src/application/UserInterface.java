@@ -88,7 +88,7 @@ public class UserInterface implements Initializable{
 	      ObservableList<String> presetNames = presetListView.getItems();
 	      for(int i=0; i<contents.length; i++) {
 	    	  String presetName = (contents[i].substring(0, contents[i].lastIndexOf('.')));
-	    	  File presetFile = new File("preset/" + presetName + ".json");
+	    	  File presetFile = new File("./preset/" + presetName + ".json");
 	    	  
 	    	  if (presetFile.length() == 0) {
 	    		  presetFile.delete();
@@ -273,7 +273,7 @@ public class UserInterface implements Initializable{
 		
 		if (!(preset == null)) {
 			//Making the file empty so we can delete it when the program is restarted
-			FileWriter file = new FileWriter("preset/" + preset + ".json");
+			FileWriter file = new FileWriter("./preset/" + preset + ".json");
 			presetListView.getItems().remove(preset);
 			consoleLabelEdit("Removed " + preset + " preset");
 		}

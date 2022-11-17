@@ -31,7 +31,7 @@ public class Preset {
 	
 	//Creates a JSON file for the preset
 	public void PresetInitializer(String fileName) throws IOException {
-		FileWriter file = new FileWriter("preset/" + fileName + ".json");
+		FileWriter file = new FileWriter("./preset/" + fileName + ".json");
 	}
 	
 	//Inserts all the directories into the preset value
@@ -49,7 +49,7 @@ public class Preset {
 		
 		object.put(fileName, array);
 		
-		FileWriter reader = new FileWriter("preset/" + fileName + ".json");
+		FileWriter reader = new FileWriter("./preset/" + fileName + ".json");
 		reader.write(object.toJSONString());
 		reader.flush();
 		reader.close();
@@ -60,7 +60,7 @@ public class Preset {
 	// Returns the preset paths in the JSON file
 	public List<String> PresetGetter(String fileName) throws IOException, ParseException {
 		JSONParser parser = new JSONParser();
-		FileReader file = new FileReader("preset/" + fileName + ".json");
+		FileReader file = new FileReader("./preset/" + fileName + ".json");
 		Object object = parser.parse(file);
 		JSONObject tempObject  = (JSONObject)object;
 		Object fileObject  = tempObject.get(fileName);
