@@ -1,4 +1,4 @@
-<img src="https://drive.google.com/uc?export=view&id=1cMtyYAmAOuYV8deKIXY9da_irEe3iX9v" width=185 align="right" />
+<img src="https://user-images.githubusercontent.com/60556017/223012096-7c3b584d-dcb0-490e-ae88-e7fde189886e.png" width=185 align="right" />
 
 # File Transfer FX
 > Create clean file directories!
@@ -12,34 +12,12 @@ Download the setup file <a href="https://media.githubusercontent.com/media/brezd
 
 ## Screenshots
 <div align="center">
-    <b>Main Screen</b>
+    <img src="https://user-images.githubusercontent.com/60556017/223010409-afe32fa3-9235-43c9-956a-18964c6cf2c0.png" align="center" width=850/>
     <br>
     <br>
-    <img src="https://drive.google.com/uc?export=view&id=14CX5NxsMbrD984AAnx6JiFfBsbnLtie_" align="center" width=850/>
+    <video src="https://user-images.githubusercontent.com/60556017/223011919-f6fbd9ad-cb23-4a0c-ba81-79b396d6ac20.mp4">
     <br>
     <br>
-    <b>Adding Files and Folders</b>
-    <br>
-    <br>
-    <img src="https://media.giphy.com/media/H0gKfdHjyTeUznFtyC/giphy.gif">
-    <br>
-    <br>
-    <b>Creating Preset</b>
-    <br>
-    <br>
-    <img src="https://media.giphy.com/media/hnlJRaGo6C9x7is8V3/giphy.gif">
-    <br>
-    <br>
-    <b>Loading Preset</b>
-    <br>
-    <br>
-    <img src="https://media.giphy.com/media/UNEzDOpCS2vuEu3ZzQ/giphy.gif">
-    <br>
-    <br>
-    <b>Backing Up Directories</b>
-    <br>
-    <br>
-    <img src="https://media.giphy.com/media/KJ7tD5PORdJKO3yOf1/giphy.gif">
 </div>
  
 ## License
